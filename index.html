@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./slider.css">
+        
+   
+    </head>
+    <body>
+    
+        <div class="scatter-plot"></div>
+
+        <div id="chartDiv" class="plot-reach">
+            <canvas id="myChart" style="height: 100%;"></canvas>
+        </div>
+            
+        <input type="number" id="chosenEpsInput">
+        
+        <div class="userInterface">
+
+            <div class="titleInfoHolder">
+                <h1 class="mainTitle">OPTICS Demonstration App</h1><button class="infoButton" data-toggle="modal" data-target="#infoModal">Info</button>
+            </div>
+            
+            <p>Web Application designed to demonstrate OPTICS and Gradient Clustering clustering algorithms.</p>
+            <p class="appTitles">Paramaters for OPTICS</p>
+
+            <div class="row epsNminDiv">
+                <div class="col-sm-4">
+                    <label>Epsilon</label>
+                    <br>
+                    <input type="number" id="epsForOptics">
+                </div>
+                <div class="col-sm-4">
+                    <label>Nmin</label>
+                    <br>
+                    <input type="number" id="NminForOptics">
+                </div>    
+                <div class="col-sm-3 buttonDivRunOptics">
+                    <button id="runOpticsBtn" title="Run the algorithm on generated data with selected parameters">Run OPTICS</button>   
+                </div>
+                
+            </div>
+
+            <p class="appTitles">Custom Cluster Creation</p>
+
+            <div>
+                <button onclick="addCluster()" title="Add a new cluster to data generation bellow">Add Cluster</button>
+                <button id="generateClustersBtn" title="Generate clusters described bellow">Generate Selected Clusters</button>
+            </div>
+            <div class="clusterHolder">
+    
+            </div>
+            <div class="noiseHolder">
+                <label for="sizeSlider_0">Noise Size:</label>
+                <span id="spanSize_0">0</span>
+                <div class="slidecontainer">   
+                    <input type="range" min="0" max="3000" value="1000" class="slider" id="sizeSlider_0">
+                </div>
+            </div>
+
+            <p class="appTitles">Gradient Clustering Algortithm</p>
+
+            <button id="runGradientClustering" disabled title="Detect all the clusters using GC algorithm">Detect Clusters Using GC</button>
+            <button id="mergeSimilarClusters" disabled title="Remove clusters that are similar to each other">Merge Similar clusters</button>
+            <button id="displayGCClusters" disabled title="Display discovered clusters on generated data">Display GC Clusters</button>
+
+           
+        </div>
+        <div id="loader"></div>
+
+        <!-- Info Modal -->
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Application Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <p>Ordering points to identify the clustering structure (OPTICS) is an algorithm for finding density-based clusters in spatial data. Its basic idea is similar to DBSCAN, but it addresses one of DBSCAN's major weaknesses: the problem of detecting meaningful clusters in data of varying density. </p>
+                    <p>This Web application was created to illustrate OPTICS clustering on randomly generated data. Users can choose the number of generated clusters by clicking the "Add Cluster" and "Remove" buttons. Specific clusters width and size can be changed using the sliders in the selected clusters "box". To generate the clusters press "Generate Selected Clusters" button. Generated data will be displayed on the top-right area of the page.</p>
+                    <p>To run OPTICS press "Run OPTICS" button and the resulting reachability plot will be displayed in the lower right area of the page. Before running the algorithm user can change values of the 2 most important parameters for OPTICS, epsilon and Nmin. After running OPTICS a red line will appear representing the results you would get by running DBSCAN algorithm with the same Nmin parameter and different value of epsilon. To change the value of the line, use the number input at the top right corner of the graph.</p>
+                    <p>Gradient Clustering is one of the algorithms used to extract clusters from a reachability plot generated by OPTICS. Users can run this algorithm by pressing the following button, "Detect Clusters Using GC". Detected clusters will appear as colored lines on the reachability plot. To merge similar clusters use the "Merge Similar Clusters" button. To see the results displayed on the generated points press "Display GC Clusters".</p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="./clusterData.js"></script>
+        <script type="text/javascript" src="./generateData.js"></script>
+        <script type="text/javascript" src="./OPTICS.js"></script>
+        <script type="text/javascript" src="./graphs.js"></script>
+        <script type="text/javascript" src="./userClusterGeneration.js"></script>
+        <script type="text/javascript" src="./gradientClustering.js"></script>
+        <script type="text/javascript" src="./controller.js"></script>
+        
+    </body>
+</html>
+
